@@ -1,8 +1,11 @@
-service: aws-node-express-api-project
+service: serverless-crud
 frameworkVersion: "3"
 
 provider:
   name: aws
+  httpApi:
+    metrics: true
+    cors: true
   runtime: nodejs14.x
 
 functions:
@@ -10,3 +13,7 @@ functions:
     handler: handler.handler
     events:
       - httpApi: "*"
+
+plugins:
+  - serverless-offline
+  - serverless-jest-plugin

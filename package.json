@@ -1,21 +1,23 @@
 {
-  "name": "serverless-crud",
+  "name": "aws-serverless-challenge",
   "version": "1.0.0",
   "description": "",
-  "dependencies": {
-    "dotenv": "^16.0.2",
-    "express": "^4.17.1",
-    "mongoose": "^6.6.1",
-    "serverless-http": "^2.7.0"
-  },
   "scripts": {
-    "invoke": "serverless invoke local --function handler",
-    "seed": "node ./src/db/mongo.seeder.js",
+    "local": "serverless offline",
+    "seed": "node ./src/db/seeder.js",
     "test": "jest",
     "coverage": "npx jest --coverage"
   },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "helmet": "^6.0.0",
+    "mongoose": "^6.6.5",
+    "serverless-http": "^3.0.3"
+  },
   "devDependencies": {
     "serverless-jest-plugin": "^0.4.0",
-    "serverless-offline": "^10.1.0"
+    "serverless-offline": "^11.1.2"
   }
 }
