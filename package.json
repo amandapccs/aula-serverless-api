@@ -1,0 +1,21 @@
+{
+  "name": "serverless-crud",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "express": "^4.17.1",
+    "mongoose": "^6.6.1",
+    "serverless-http": "^2.7.0"
+  },
+  "scripts": {
+    "invoke": "serverless invoke local --function handler",
+    "seed": "node ./src/db/mongo.seeder.js",
+    "test": "jest",
+    "coverage": "npx jest --coverage"
+  },
+  "devDependencies": {
+    "serverless-jest-plugin": "^0.4.0",
+    "serverless-offline": "^10.1.0"
+  }
+}
