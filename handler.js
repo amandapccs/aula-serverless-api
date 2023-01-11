@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 
 app.use(helmet());
+app.use(express.json());
 
 app.post("/", post.create.bind(post));
 app.get("/", post.getAll.bind(post));
