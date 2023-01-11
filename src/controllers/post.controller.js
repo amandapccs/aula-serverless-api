@@ -1,5 +1,5 @@
 class PostController {
-  contructor(service) {
+  constructor(service) {
     this.service = service;
   }
 

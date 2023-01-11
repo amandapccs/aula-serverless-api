@@ -6,6 +6,6 @@ const PostSchema = new Schema({
   insertedAtDate: { type: Date, default: Date.now },
 }, { versionKey: false });
 
-const PostModel = model('Post2', PostSchema);
+const PostModel = model('Posts2', PostSchema);
 
 module.exports = { PostModel };
