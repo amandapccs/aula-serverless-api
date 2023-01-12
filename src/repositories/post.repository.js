@@ -7,7 +7,6 @@ class PostRepository {
 
   async getAll() {
     const posts = await this.model.find();
-    // console.log('>>> repository', posts)
     return posts
   }
 
