@@ -33,7 +33,7 @@ class PostService {
   async create(post) {
     try {
       const validatedPost = validatePost(post)
-      console.log('vlidate post --->', validatedPost)
+
       if (validatedPost) return validatedPost;
       const createdPost = await this.repository.create(post);
       return createdPost;
