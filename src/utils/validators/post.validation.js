@@ -5,7 +5,7 @@ function validateTitle(title) {
     return {
       validationError: {
         message: "Title cannot be empty",
-        status: StatusCode.NO_CONTENT,
+        status: StatusCode.BAD_REQUEST,
       },
     };
   }
@@ -36,7 +36,7 @@ function validateContent(content) {
     return {
       validationError: {
         message: "Content cannot be empty",
-        status: StatusCode.NO_CONTENT,
+        status: StatusCode.BAD_REQUEST,
       },
     };
   }

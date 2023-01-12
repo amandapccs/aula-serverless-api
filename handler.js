@@ -1,43 +1,34 @@
 const serverless = require("serverless-http");
 const express = require("express");
 const { post } = require("././src/factories/post.factory");
+const mongoose = require("mongoose");
+require("dotenv").config();
 const app = express();
-require('dotenv').config();
-const mongoose = require('mongoose');
-const helmet = require('helmet');
+const helmet = require("helmet");
 
 app.use(helmet());
-app.use(express.json());
 
-app.post("/", post.create.bind(post));
 app.get("/", post.getAll.bind(post));
 app.get("/:id", post.getById.bind(post));
+app.post("/", post.create.bind(post));
 app.put("/:id", post.update.bind(post));
 app.delete("/:id", post.delete.bind(post));
 
-app.use((req, res) => {
-  return res.status(404).json({
-    error: "Not Found",
-  });
-});
-
-let cachedDb = null;
+let cachedDb = null; //espaço de memória para armazenar o banco de dados
 const uri = process.env.MONGO;
 
-module.exports.handler = serverless(
-  app,
-  {
-    request: async (request, event, context) => {
-      context.callbackWaitsForEmptyEventLoop = false;
+module.exports.handler = serverless(app, {
+  request: async (request, event, context) => {
+    context.callbackWaitsForEmptyEventLoop = false;
 
-      if (cachedDb === null) {
-        cachedDb = mongoose.connect(uri, {
-          useNewUrlParser: true,
-          useUnifiedTopology: true, serverSelectionTimeoutMS: 5000
-        });
-      }
+    if (cachedDb === null) {
+      cachedDb = mongoose.connect(uri, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 5000,
+      });
+    }
 
-      await cachedDb;
-    },
-  }
-);
+    await cachedDb;
+  },
+});

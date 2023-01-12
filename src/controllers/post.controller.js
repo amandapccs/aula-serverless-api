@@ -14,8 +14,12 @@ class PostController {
 
   async getById(req, res) {
     const { id } = req.params;
-    // TODO: validate id
+
     const post = await this.service.getById(id);
+    if ("validationError" in post)
+      return res
+        .status(post.validationError.status)
+        .json({ message: post.validationError.message });
 
     return res.status(StatusCode.OK).json(post);
   }
@@ -30,12 +34,13 @@ class PostController {
     }
     const postDto = new PostDto(body);
     const post = await this.service.create(postDto);
+  
     if ("validationError" in post) {
-      console.log('post.validationError', post)
       return res
         .status(post.validationError.status)
-        .json(post.validationError.message);
+        .json({ message: post.validationError.message });
     }
+
     return res.status(StatusCode.CREATED).json(post);
   }
 
@@ -47,12 +52,15 @@ class PostController {
         error: "Bad Request",
       });
     }
+
     const postDto = new PostDto(body);
+    const post = await this.service.update(id, postDto);
+
     if ("validationError" in post)
       return res
         .status(post.validationError.status)
         .json(post.validationError.message);
-    const post = await this.service.update(id, postDto);
+
     return res.status(StatusCode.OK).json(post);
   }
 

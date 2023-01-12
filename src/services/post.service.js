@@ -23,6 +23,7 @@ class PostService {
 
     try {
       const post = await this.repository.getById(id);
+      if (!post) return invalidPostId(id)
       return post;
     } catch (error) {
       return promisePostError(error);
@@ -32,6 +33,7 @@ class PostService {
   async create(post) {
     try {
       const validatedPost = validatePost(post)
+      console.log('vlidate post --->', validatedPost)
       if (validatedPost) return validatedPost;
       const createdPost = await this.repository.create(post);
       return createdPost;
